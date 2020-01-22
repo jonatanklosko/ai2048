@@ -1,0 +1,16 @@
+.board {
+  -fx-background-color: #bbada0;
+  -fx-background-radius: 6;
+}
+
+.tile {
+  -fx-font-size: 55px;
+  -fx-text-fill: #776e65;
+  -fx-background-color: #eee4da;
+  -fx-background-radius: 8;
+  -fx-border-radius: 8;
+}
+
+.tile.empty {
+  -fx-background-color: rgba(238, 228, 218, 0.35);
+}

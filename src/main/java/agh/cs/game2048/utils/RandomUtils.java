@@ -1,4 +1,4 @@
-package agh.cs.game2048;
+package agh.cs.game2048.utils;
 
 import java.util.List;
 import java.util.Random;

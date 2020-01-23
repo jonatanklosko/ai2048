@@ -1,4 +1,4 @@
-package agh.cs.game2048;
+package agh.cs.game2048.ui;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;

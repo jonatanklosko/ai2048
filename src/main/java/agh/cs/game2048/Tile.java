@@ -1,5 +1,7 @@
 package agh.cs.game2048;
 
+import agh.cs.game2048.geometry.Position;
+
 public class Tile {
   private int value;
   private Position position;
@@ -23,5 +25,9 @@ public class Tile {
 
   public void doubleValue() {
     this.value *= 2;
+  }
+
+  public Tile clone() {
+    return new Tile(this.value, this.position);
   }
 }

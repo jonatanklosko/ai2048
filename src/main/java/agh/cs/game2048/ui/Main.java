@@ -15,11 +15,13 @@ public class Main extends Application {
 
   @Override
   public void start(Stage stage) {
-    final var board = new Board();
     final var vbox = new VBox();
+    final var board = new Board();
+    final var navbar = new Navbar();
+    vbox.getChildren().add(navbar);
     vbox.getChildren().add(board);
     vbox.setAlignment(Pos.CENTER);
-    final var scene = new Scene(vbox, board.getSize() + 50, board.getSize() + 50);
+    final var scene = new Scene(vbox);
     scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
     stage.setScene(scene);

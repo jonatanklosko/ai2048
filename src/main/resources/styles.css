@@ -1,3 +1,32 @@
+.root {
+  -fx-padding: 24px;
+}
+
+.navbar {
+}
+
+.navbar .title {
+  -fx-font-size: 80px;
+  -fx-text-fill: #776e65;
+}
+
+.navbar .score {
+  -fx-alignment: center;
+  -fx-background-color: #bbada0;
+  -fx-padding: 5px 15px;
+  -fx-background-radius: 8;
+}
+
+.navbar .score .score-title {
+  -fx-font-size: 13px;
+  -fx-text-fill: #eee4da;
+}
+
+.navbar .score .score-value {
+  -fx-font-size: 25px;
+  -fx-text-fill: white;
+}
+
 .board {
   -fx-background-color: #bbada0;
   -fx-background-radius: 6;
@@ -9,7 +38,6 @@
 
 .tile {
   -fx-background-radius: 8;
-  -fx-border-radius: 8;
 }
 
 .tile-2 {

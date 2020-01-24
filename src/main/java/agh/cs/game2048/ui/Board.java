@@ -1,11 +1,8 @@
 package agh.cs.game2048.ui;
 
 import agh.cs.game2048.*;
-import agh.cs.game2048.geometry.Move;
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
-import javafx.application.Platform;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 
@@ -18,7 +15,6 @@ public class Board extends Pane {
   private Map<Tile, BoardTile> boardTiles;
 
   public Board(Game game) {
-    game.addTileChangesListener(this::onTileChanges);
     this.boardTiles = new HashMap<>();
 
     final var boardSize = this.getSize();
@@ -35,41 +31,8 @@ public class Board extends Pane {
       this.getChildren().add(tile);
     });
 
-    game.initializeRandomTiles(2);
-
-//    Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(100), e -> {
-//      game.step(Solver.bestMove(game));
-//    }));
-//    fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-//    fiveSecondsWonder.play();
-//    }, 0, 60);
-
-//    final var solver = new Solver(game);
-
-//    new Timer().schedule(new TimerTask() {
-//      @Override
-//      public void run() {
-////        synchronized (game) {
-//          Move move = solver.bestMove();
-//          Platform.runLater(() -> {
-//            game.step(move);
-//          });
-////        }
-//      }
-//    }, 0, 60);
-
-
-//    game.addTileChangesListener(tileEvents -> {
-//      new Thread(() -> {
-//        long startTime = System.nanoTime();
-//        Move move = solver.bestMove();
-//        long stopTime = System.nanoTime();
-//        System.out.println((stopTime - startTime) / 1000000);
-//        Platform.runLater(() -> {
-//          game.step(move);
-//        });
-//      }).start();
-//    });
+    game.getTiles().forEach(tile -> this.addTileAndAnimate(tile).play());
+    game.addTileChangesListener(this::onTileChanges);
   }
 
   public int getSize() {

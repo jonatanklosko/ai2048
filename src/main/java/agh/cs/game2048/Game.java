@@ -70,9 +70,22 @@ public class Game {
     return this.score;
   }
 
+  public List<Tile> getTiles() {
+    return this.tiles;
+  }
+
   public Game fork() {
     final var tileClones = this.tiles.stream().map(Tile::clone).collect(Collectors.toList());
     return new Game(tileClones, this.score);
+  }
+
+  public void reset() {
+    this.score = 0;
+    final var tileEvents = this.tiles.stream()
+        .map(tile -> (TileEvent) new TileVanishedEvent(tile))
+        .collect(Collectors.toList());
+    this.tiles.clear();
+    this.notifyTileChangesListeners(tileEvents);
   }
 
   private Optional<Tile> addRandomTile() {

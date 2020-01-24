@@ -137,6 +137,7 @@
 }
 
 .toolbar {
+  -fx-spacing: 8px;
   -fx-alignment: center-right;
   -fx-padding: 16px 0 0 0;
 }

@@ -1,16 +1,14 @@
 package agh.cs.game2048;
 
 import agh.cs.game2048.geometry.Move;
-import agh.cs.game2048.utils.RandomUtils;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solver {
-  public static final int NUMBER_OF_RUNS = 30;
+  public static final int NUMBER_OF_RUNS = 50;
 
   static class RunResult {
     public final int score;

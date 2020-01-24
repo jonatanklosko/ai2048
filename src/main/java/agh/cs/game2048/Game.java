@@ -66,6 +66,35 @@ public class Game {
     }
   }
 
+  public boolean anyMovePossibility() {
+    if (this.tiles.size() != SIZE * SIZE) {
+      return true;
+    }
+
+    return Stream.of(Move.UP, Move.RIGHT).anyMatch(move ->
+        this.tiles.stream().anyMatch(tile -> {
+          Position adjacentPosition = tile.getPosition().adjacent(move);
+          return this.isOnBoard(adjacentPosition)
+              && this.tileAt(adjacentPosition)
+              .map(adjacentTile -> adjacentTile.getValue() == tile.getValue())
+              .orElseThrow(); /* We check for empty positions at the very beginning. */
+        }));
+  }
+
+  public List<Move> possibleMoves() {
+    return Stream.of(Move.UP, Move.RIGHT, Move.DOWN, Move.LEFT)
+        .filter(move ->
+            this.tiles.stream().anyMatch(tile -> {
+              Position adjacentPosition = tile.getPosition().adjacent(move);
+              return this.isOnBoard(adjacentPosition)
+                  && this.tileAt(adjacentPosition)
+                  .map(adjacentTile -> adjacentTile.getValue() == tile.getValue())
+                  .orElse(true); /* Empty position. */
+            })
+        )
+        .collect(Collectors.toList());
+  }
+
   public int getScore() {
     return this.score;
   }
@@ -148,26 +177,8 @@ public class Game {
     }
     return lines;
   }
-//
-//  public List<Move> possibleMoves() {
-//    return Stream.of(Move.UP, Move.RIGHT, Move.DOWN, Move.LEFT).parallel()
-//        .filter(move -> !this.fork().move(move).isEmpty())
-//        .collect(Collectors.toList());
-//  }
 
-  public boolean anyMovePossibility() {
-    if (this.tiles.size() != SIZE * SIZE) {
-      return true;
-    }
-    return Stream.concat(this.linesForMove(Move.DOWN).stream(), this.linesForMove(Move.RIGHT).stream())
-        .map(line -> line.stream()
-            .map(this::tileAt)
-            .flatMap(Optional::stream)
-            .map(Tile::getValue)
-            .collect(Collectors.toList())
-        )
-        .anyMatch(values ->
-          IntStream.range(1, values.size()).anyMatch(i -> values.get(i).equals(values.get(i - 1)))
-        );
+  private boolean isOnBoard(Position position) {
+    return 0 <= position.x && position.x < SIZE && 0 <= position.y && position.y < SIZE;
   }
 }

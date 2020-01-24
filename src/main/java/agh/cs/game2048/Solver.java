@@ -1,6 +1,7 @@
 package agh.cs.game2048;
 
 import agh.cs.game2048.geometry.Move;
+import agh.cs.game2048.utils.RandomUtils;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -43,7 +44,8 @@ public class Solver {
 
   private RunResult randomRun() {
     Game game = this.game.fork();
-    Move firstMove = Move.randomMove();
+//    Move firstMove = Move.randomMove();
+    Move firstMove = RandomUtils.randomElement(game.possibleMoves());
     game.step(firstMove);
     while (game.anyMovePossibility()) {
       game.step(Move.randomMove());

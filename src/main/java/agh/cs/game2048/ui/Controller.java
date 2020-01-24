@@ -52,8 +52,6 @@ public class Controller {
       final var thread = new Thread(() -> {
         final var wait = new AtomicBoolean(false);
         while (this.solverRunning.get()) {
-          while (wait.get()) {}
-//          Move move = solver.bestMove();
         long startTime = System.nanoTime();
         Move move = solver.bestMove();
 //        long stopTime = System.nanoTime();
@@ -67,11 +65,12 @@ public class Controller {
           wait.set(true);
           Platform.runLater(() -> {
             game.step(move);
-            wait.set(false);
             if (!this.game.anyMovePossibility()) {
               this.solverRunning.set(false);
             }
+            wait.set(false);
           });
+          while (wait.get()) {}
         }
       });
       thread.setDaemon(true);

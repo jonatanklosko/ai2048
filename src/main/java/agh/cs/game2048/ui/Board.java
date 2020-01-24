@@ -15,12 +15,10 @@ public class Board extends Pane {
   public static final int TILE_SIZE = 100;
   public static final int BORDER_SIZE = 16;
 
-  private Game game;
   private Map<Tile, BoardTile> boardTiles;
 
-  public Board() {
-    this.game = new Game();
-    this.game.addTileChangesListener(this::onTileChanges);
+  public Board(Game game) {
+    game.addTileChangesListener(this::onTileChanges);
     this.boardTiles = new HashMap<>();
 
     final var boardSize = this.getSize();
@@ -28,7 +26,7 @@ public class Board extends Pane {
     this.setMaxSize(boardSize, boardSize);
     this.getStyleClass().add("board");
     // Add background cells.
-    this.game.allPositions().forEach(position -> {
+    game.allPositions().forEach(position -> {
       final var tile = new Region();
       tile.setPrefSize(TILE_SIZE, TILE_SIZE);
       tile.setLayoutX(position.x * TILE_SIZE + (position.x + 1) * BORDER_SIZE);
@@ -37,31 +35,31 @@ public class Board extends Pane {
       this.getChildren().add(tile);
     });
 
-    this.game.initializeRandomTiles(2);
+    game.initializeRandomTiles(2);
 
     this.setFocusTraversable(true);
     this.setOnKeyPressed(event -> {
       if (event.getCode() == KeyCode.UP) {
-        this.game.step(Move.UP);
+        game.step(Move.UP);
       }
       if (event.getCode() == KeyCode.RIGHT) {
-        this.game.step(Move.RIGHT);
+        game.step(Move.RIGHT);
       }
       if (event.getCode() == KeyCode.DOWN) {
-        this.game.step(Move.DOWN);
+        game.step(Move.DOWN);
       }
       if (event.getCode() == KeyCode.LEFT) {
-        this.game.step(Move.LEFT);
+        game.step(Move.LEFT);
       }
     });
 //    Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(100), e -> {
-//      this.game.step(Solver.bestMove(this.game));
+//      game.step(Solver.bestMove(game));
 //    }));
 //    fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
 //    fiveSecondsWonder.play();
 //    }, 0, 60);
 
-    final var solver = new Solver(this.game);
+    final var solver = new Solver(game);
 
 //    new Timer().schedule(new TimerTask() {
 //      @Override

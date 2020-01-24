@@ -1,6 +1,6 @@
 package agh.cs.game2048.ui;
 
-import agh.cs.game2048.Game;
+import agh.cs.game2048.game.Game;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

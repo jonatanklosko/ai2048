@@ -1,7 +1,7 @@
 package agh.cs.game2048.ui;
 
-import agh.cs.game2048.Game;
-import agh.cs.game2048.Solver;
+import agh.cs.game2048.game.Game;
+import agh.cs.game2048.game.Solver;
 import agh.cs.game2048.geometry.Move;
 import javafx.application.Platform;
 import javafx.scene.Scene;

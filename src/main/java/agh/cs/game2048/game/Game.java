@@ -1,5 +1,9 @@
-package agh.cs.game2048;
+package agh.cs.game2048.game;
 
+import agh.cs.game2048.game.events.TileAddedEvent;
+import agh.cs.game2048.game.events.TileChangesListener;
+import agh.cs.game2048.game.events.TileEvent;
+import agh.cs.game2048.game.events.TileVanishedEvent;
 import agh.cs.game2048.geometry.Move;
 import agh.cs.game2048.geometry.Position;
 import agh.cs.game2048.utils.RandomUtils;

@@ -1,12 +1,18 @@
 package agh.cs.game2048.ui;
 
-import agh.cs.game2048.*;
+import agh.cs.game2048.game.Game;
+import agh.cs.game2048.game.Tile;
+import agh.cs.game2048.game.events.TileAddedEvent;
+import agh.cs.game2048.game.events.TileEvent;
+import agh.cs.game2048.game.events.TileVanishedEvent;
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Board extends Pane {
   public static final int TILE_SIZE = 100;

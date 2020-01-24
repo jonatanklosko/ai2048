@@ -99,16 +99,11 @@ public class Game {
 
   private List<TileEvent> move(Move move) {
     List<TileEvent> tileEvents = new LinkedList<>();
-    this.linesForMove(move).forEach(positions -> {
-      final var tileStack = new Stack<Tile>();
-      tileStack.addAll(
-          positions.stream()
-              .map(this::tileAt)
-              .flatMap(Optional::stream)
-              .collect(Collectors.toList())
-      );
-      final var positionStack = new Stack<Position>();
-      positionStack.addAll(positions);
+    this.linesForMove(move).forEach(positionStack -> {
+      final var tileStack = positionStack.stream()
+          .map(this::tileAt)
+          .flatMap(Optional::stream)
+          .collect(Collectors.toCollection(Stack<Tile>::new));
       while (!tileStack.isEmpty()) {
         final var tile = tileStack.pop();
         final var destination = positionStack.pop();
@@ -140,10 +135,11 @@ public class Game {
         .findFirst();
   }
 
-  private Collection<List<Position>> linesForMove(Move move) {
+  private Collection<Stack<Position>> linesForMove(Move move) {
     final var lines = this.allPositions()
         .collect(Collectors.groupingBy(
-            position -> move.isHorizontal() ? position.y : position.x
+            position -> move.isHorizontal() ? position.y : position.x,
+            Collectors.toCollection(Stack<Position>::new)
         ))
         .values();
     final var isBackwards = move == Move.UP || move == Move.LEFT;

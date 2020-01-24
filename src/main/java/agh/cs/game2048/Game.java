@@ -171,7 +171,7 @@ public class Game {
             .collect(Collectors.toList())
         )
         .anyMatch(values ->
-          IntStream.range(1, values.size()).anyMatch(i -> values.get(i) == values.get(i - 1))
+          IntStream.range(1, values.size()).anyMatch(i -> values.get(i).equals(values.get(i - 1)))
         );
   }
 }

@@ -43,6 +43,14 @@ public class BoardTile extends Label {
     return scaleTransition;
   }
 
+  public ScaleTransition animateDisappearance() {
+    final var scaleTransition = new ScaleTransition(APPEARANCE_DURATION, this);
+    scaleTransition.setToX(0);
+    scaleTransition.setToY(0);
+    scaleTransition.setInterpolator(Interpolator.EASE_OUT);
+    return scaleTransition;
+  }
+
   public void updateValue(int value) {
     this.setText(String.valueOf(value));
     this.getStyleClass().add("tile-" + value);

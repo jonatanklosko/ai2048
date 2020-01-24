@@ -44,9 +44,10 @@ public class Board extends Pane {
       Tile tile = tileEvent.tile;
       if (tileEvent instanceof TileAddedEvent) {
         return this.addTileAndAnimate(tile);
+      } else if (tileEvent instanceof TileVanishedEvent) {
+        return this.removeTileAndAnimate(tile);
       } else {
-        boolean remove = tileEvent instanceof TileVanishedEvent;
-        return this.updateTileAndAnimate(tile, remove);
+        return this.updateTileAndAnimate(tile);
       }
     }).toArray(Animation[]::new);
     final var animation = new ParallelTransition(animations);
@@ -60,16 +61,20 @@ public class Board extends Pane {
     return boardTile.animateAppearance();
   }
 
-  private Animation updateTileAndAnimate(Tile tile, boolean remove) {
+  private Animation updateTileAndAnimate(Tile tile) {
     final var boardTile = this.boardTiles.get(tile);
     final var timeline = boardTile.animateMoveTo(tile.getPosition());
-    timeline.setOnFinished(event -> {
-      boardTile.updateValue(tile.getValue());
-      if (remove) {
-        this.getChildren().remove(boardTile);
-        this.boardTiles.remove(tile);
-      }
-    });
+    timeline.setOnFinished(event -> boardTile.updateValue(tile.getValue()));
     return timeline;
+  }
+
+  private Animation removeTileAndAnimate(Tile tile) {
+    final var boardTile = this.boardTiles.get(tile);
+    final var disappearance = boardTile.animateDisappearance();
+    disappearance.setOnFinished(event -> {
+      this.getChildren().remove(boardTile);
+      this.boardTiles.remove(tile);
+    });
+    return new ParallelTransition(this.updateTileAndAnimate(tile), disappearance);
   }
 }

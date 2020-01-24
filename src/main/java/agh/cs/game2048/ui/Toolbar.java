@@ -5,7 +5,7 @@ import javafx.scene.layout.HBox;
 
 public class Toolbar extends HBox {
   public Toolbar(Controller controller) {
-    final var newGame = new Button("New agh.cs.game2048.game");
+    final var newGame = new Button("New game");
     newGame.getStyleClass().add("button");
     newGame.setOnAction(event -> controller.newGame());
 

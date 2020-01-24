@@ -3,6 +3,7 @@ package agh.cs.game2048.ui;
 import agh.cs.game2048.game.Game;
 import agh.cs.game2048.game.Tile;
 import agh.cs.game2048.game.events.TileAddedEvent;
+import agh.cs.game2048.game.events.TileChangedEvent;
 import agh.cs.game2048.game.events.TileEvent;
 import agh.cs.game2048.game.events.TileVanishedEvent;
 import javafx.animation.Animation;
@@ -47,7 +48,7 @@ public class Board extends Pane {
 
   public void onTileChanges(List<TileEvent> tileEvents) {
     final var animations = tileEvents.stream().map(tileEvent -> {
-      Tile tile = tileEvent.tile;
+      Tile tile = tileEvent.getTile();
       if (tileEvent instanceof TileAddedEvent) {
         return this.addTileAndAnimate(tile);
       } else if (tileEvent instanceof TileVanishedEvent) {

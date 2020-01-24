@@ -1,9 +1,6 @@
 package agh.cs.game2048.game;
 
-import agh.cs.game2048.game.events.TileAddedEvent;
-import agh.cs.game2048.game.events.TileChangesListener;
-import agh.cs.game2048.game.events.TileEvent;
-import agh.cs.game2048.game.events.TileVanishedEvent;
+import agh.cs.game2048.game.events.*;
 import agh.cs.game2048.geometry.Move;
 import agh.cs.game2048.geometry.Position;
 import agh.cs.game2048.utils.RandomUtils;
@@ -17,7 +14,7 @@ public class Game {
   public static final int SIZE = 4;
   private List<Tile> tiles;
   private int score;
-  private List<TileChangesListener> tileChangesListeners;
+  private List<TileEventsListener> tileChangesListeners;
 
   public Game() {
     this.tiles = new LinkedList<>();
@@ -32,7 +29,7 @@ public class Game {
     this.tileChangesListeners = new LinkedList<>();
   }
 
-  public void addTileChangesListener(TileChangesListener listener) {
+  public void addTileChangesListener(TileEventsListener listener) {
     this.tileChangesListeners.add(listener);
   }
 
@@ -150,12 +147,12 @@ public class Game {
             this.score += tile.getValue();
             this.tiles.remove(prevTile);
             tileEvents.add(new TileVanishedEvent(prevTile));
-            tileEvents.add(new TileEvent(tile));
+            tileEvents.add(new TileChangedEvent(tile));
           }
         }
         if (!tile.getPosition().equals(destination)) {
           tile.setPosition(destination);
-          tileEvents.add(new TileEvent(tile));
+          tileEvents.add(new TileChangedEvent(tile));
         }
       }
     });

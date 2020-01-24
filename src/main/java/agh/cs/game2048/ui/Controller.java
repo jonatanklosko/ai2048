@@ -12,6 +12,8 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Controller {
+  public static final int MIN_SOLVER_STEP_MS = 60;
+
   private Game game;
   private Solver solver;
   private AtomicBoolean solverRunning;
@@ -47,41 +49,47 @@ public class Controller {
   }
 
   public void toggleRunning() {
-    if (!this.solverRunning.get()) {
+    if (this.solverRunning.get()) {
+      this.solverRunning.set(false);
+    } else {
       this.solverRunning.set(true);
-      final var thread = new Thread(() -> {
-        final var wait = new AtomicBoolean(false);
-        while (this.solverRunning.get()) {
-        long startTime = System.nanoTime();
-        Move move = solver.bestMove();
-//        long stopTime = System.nanoTime();
-//        long diff = 60 - (stopTime - startTime) / 1000000;
-//        try {
-//          if (diff > 0) {
-//          Thread.sleep(diff);
-//          }
-//        } catch(Exception e) {}
-        System.out.println((System.nanoTime() - startTime) / 1000000);
-          wait.set(true);
-          Platform.runLater(() -> {
-            game.step(move);
-            if (!this.game.anyMovePossibility()) {
-              this.solverRunning.set(false);
-            }
-            wait.set(false);
-          });
-          while (wait.get()) {}
-        }
-      });
+      final var thread = this.createSolverThread();
       thread.setDaemon(true);
       thread.start();
-    } else {
-      this.solverRunning.set(false);
     }
   }
 
   public void newGame() {
     this.game.reset();
     this.game.initializeRandomTiles(2);
+  }
+
+  private Thread createSolverThread() {
+    return new Thread(() -> {
+      final var waitForGameUpdate = new AtomicBoolean(false);
+      while (this.solverRunning.get()) {
+        final var searchStartTime = System.nanoTime();
+        final var move = solver.bestMove();
+        final var searchEndTime = System.nanoTime();
+        final var millisLeft = 60 - (searchEndTime - searchStartTime) / 1000000;
+        if (millisLeft > 0) {
+          try {
+            Thread.sleep(millisLeft);
+          } catch (InterruptedException exception) {
+            return;
+          }
+        }
+        /* The actual update must be run in the UI thread, so we need to wait for it to figure out the next move. */
+        waitForGameUpdate.set(true);
+        Platform.runLater(() -> {
+          game.step(move);
+          if (!this.game.anyMovePossibility()) {
+            this.solverRunning.set(false);
+          }
+          waitForGameUpdate.set(false);
+        });
+        while (waitForGameUpdate.get()) {}
+      }
+    });
   }
 }

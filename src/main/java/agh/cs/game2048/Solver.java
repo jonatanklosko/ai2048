@@ -44,7 +44,6 @@ public class Solver {
 
   private RunResult randomRun() {
     Game game = this.game.fork();
-//    Move firstMove = Move.randomMove();
     Move firstMove = RandomUtils.randomElement(game.possibleMoves());
     game.step(firstMove);
     while (game.anyMovePossibility()) {
@@ -52,17 +51,4 @@ public class Solver {
     }
     return new RunResult(game.getScore(), firstMove);
   }
-
-//  private RunResult randomRun() {
-//    Game game = this.game.fork();
-////    Move firstMove = Move.randomMove();
-//    Move firstMove = RandomUtils.randomElement(game.possibleMoves());
-//    game.step(firstMove);
-//    List<Move> possible = game.possibleMoves();
-//    while (!possible.isEmpty()) {
-//      game.step(RandomUtils.randomElement(possible));
-//      possible = game.possibleMoves();
-//    }
-//    return new RunResult(game.getScore(), firstMove);
-//  }
 }

@@ -1,5 +1,5 @@
 .root {
-  -fx-padding: 24px;
+  -fx-padding: 16px 24px;
 }
 
 .navbar {
@@ -134,4 +134,19 @@
   -fx-font-size: 25px;
   -fx-text-fill: #f9f6f2;
   -fx-background-color: #3c3a32;
+}
+
+.toolbar {
+  -fx-alignment: center-right;
+  -fx-padding: 16px 0 0 0;
+}
+
+.toolbar .button {
+  -fx-background-color: #8f7a66;
+  -fx-text-fill: #f9f6f2;
+  -fx-padding: 0 20px;
+  -fx-background-radius: 8;
+  -fx-font-size: 18px;
+  -fx-pref-height: 40px;
+  -fx-font-weight: bold;
 }

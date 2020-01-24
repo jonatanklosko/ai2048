@@ -16,16 +16,18 @@ public class Main extends Application {
 
   @Override
   public void start(Stage stage) {
-    final var game = new Game();
+    final var controller = new Controller();
 
     final var vbox = new VBox();
-    final var navbar = new Navbar(game);
-    final var board = new Board(game);
-    final var toolbar = new Toolbar();
+    final var navbar = new Navbar(controller.getGame());
+    final var board = new Board(controller.getGame());
+    final var toolbar = new Toolbar(controller);
     vbox.getChildren().addAll(navbar, board, toolbar);
     vbox.setAlignment(Pos.CENTER);
     final var scene = new Scene(vbox);
     scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+
+    controller.registerKeybindings(scene);
 
     stage.setScene(scene);
     stage.setTitle(TITLE);

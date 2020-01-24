@@ -37,21 +37,6 @@ public class Board extends Pane {
 
     game.initializeRandomTiles(2);
 
-    this.setFocusTraversable(true);
-    this.setOnKeyPressed(event -> {
-      if (event.getCode() == KeyCode.UP) {
-        game.step(Move.UP);
-      }
-      if (event.getCode() == KeyCode.RIGHT) {
-        game.step(Move.RIGHT);
-      }
-      if (event.getCode() == KeyCode.DOWN) {
-        game.step(Move.DOWN);
-      }
-      if (event.getCode() == KeyCode.LEFT) {
-        game.step(Move.LEFT);
-      }
-    });
 //    Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(100), e -> {
 //      game.step(Solver.bestMove(game));
 //    }));
@@ -59,7 +44,7 @@ public class Board extends Pane {
 //    fiveSecondsWonder.play();
 //    }, 0, 60);
 
-    final var solver = new Solver(game);
+//    final var solver = new Solver(game);
 
 //    new Timer().schedule(new TimerTask() {
 //      @Override
@@ -72,17 +57,19 @@ public class Board extends Pane {
 ////        }
 //      }
 //    }, 0, 60);
-    game.addTileChangesListener(tileEvents -> {
-      new Thread(() -> {
-        long startTime = System.nanoTime();
-        Move move = solver.bestMove();
-        long stopTime = System.nanoTime();
-        System.out.println((stopTime - startTime) / 1000000);
-        Platform.runLater(() -> {
-          game.step(move);
-        });
-      }).start();
-    });
+
+
+//    game.addTileChangesListener(tileEvents -> {
+//      new Thread(() -> {
+//        long startTime = System.nanoTime();
+//        Move move = solver.bestMove();
+//        long stopTime = System.nanoTime();
+//        System.out.println((stopTime - startTime) / 1000000);
+//        Platform.runLater(() -> {
+//          game.step(move);
+//        });
+//      }).start();
+//    });
   }
 
   public int getSize() {

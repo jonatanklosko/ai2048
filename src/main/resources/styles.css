@@ -2,7 +2,8 @@
   -fx-padding: 16px 24px;
 }
 
-.navbar {
+.app-container {
+  -fx-alignment: center;
 }
 
 .navbar .title {
@@ -30,6 +31,26 @@
 .board {
   -fx-background-color: #bbada0;
   -fx-background-radius: 6;
+}
+
+.overlay {
+  -fx-alignment: center;
+  -fx-spacing: 32px;
+  -fx-background-radius: 6;
+  -fx-background-color: rgba(238, 228, 218, 0.5);
+}
+
+.overlay .overlay-text {
+  -fx-font-size: 60px;
+  -fx-text-fill: #776e65;
+}
+
+.overlay-gold {
+  -fx-background-color: rgba(237, 194, 46, 0.5);
+}
+
+.overlay-gold .overlay-text {
+  -fx-text-fill: #f9f6f2;
 }
 
 .tile.empty {
@@ -124,7 +145,7 @@
   -fx-padding: 16px 0 0 0;
 }
 
-.toolbar .button {
+.button {
   -fx-background-color: #8f7a66;
   -fx-text-fill: #f9f6f2;
   -fx-padding: 0 20px;
@@ -133,4 +154,8 @@
   -fx-pref-height: 40px;
   -fx-font-weight: bold;
   -fx-cursor: hand;
+}
+
+.button:disabled {
+  -fx-opacity: 0.5;
 }

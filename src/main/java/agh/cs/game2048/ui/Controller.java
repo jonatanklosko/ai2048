@@ -4,6 +4,8 @@ import agh.cs.game2048.game.Game;
 import agh.cs.game2048.game.Solver;
 import agh.cs.game2048.geometry.Move;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,10 +20,16 @@ public class Controller {
   private Solver solver;
   private AtomicBoolean solverRunning;
 
+  public final BooleanProperty gameOver;
+  public final BooleanProperty gameWon;
+
   public Controller() {
     this.game = new Game();
     this.solver = new Solver(game);
     this.solverRunning = new AtomicBoolean(false);
+
+    this.gameOver = new SimpleBooleanProperty(false);
+    this.gameWon = new SimpleBooleanProperty(false);
 
     this.game.initializeRandomTiles(2);
   }
@@ -33,7 +41,8 @@ public class Controller {
   public void registerKeybindings(Scene scene) {
     scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
       if (!this.solverRunning.get()) {
-        this.keyCodeToMove(event.getCode()).ifPresent(move -> this.game.step(move));
+        this.keyCodeToMove(event.getCode())
+            .ifPresent(move -> this.makeGameStepAndCheckState(move));
       }
     });
   }
@@ -61,6 +70,8 @@ public class Controller {
 
   public void newGame() {
     this.solverRunning.set(false);
+    this.gameOver.set(false);
+    this.gameWon.set(false);
     this.game.reset();
     this.game.initializeRandomTiles(2);
   }
@@ -83,14 +94,23 @@ public class Controller {
         /* The actual update must be run in the UI thread, so we need to wait for it to figure out the next move. */
         waitForGameUpdate.set(true);
         Platform.runLater(() -> {
-          game.step(move);
-          if (!this.game.anyMovePossibility()) {
-            this.solverRunning.set(false);
-          }
+          this.makeGameStepAndCheckState(move);
           waitForGameUpdate.set(false);
         });
         while (waitForGameUpdate.get()) {}
       }
     });
+  }
+
+  private void makeGameStepAndCheckState(Move move) {
+    this.game.step(move);
+    if (!this.game.anyMovePossibility()) {
+      this.gameOver.set(true);
+      this.solverRunning.set(false);
+    }
+    if (!this.gameWon.get() && this.game.hasWinningTile()) {
+      this.gameWon.set(true);
+      this.solverRunning.set(false);
+    }
   }
 }

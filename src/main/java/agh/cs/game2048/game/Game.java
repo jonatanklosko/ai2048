@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 public class Game {
   public static final int SIZE = 4;
+  public static final int WINNING_TILE_VALUE = 2048;
   private List<Tile> tiles;
   private int score;
   private List<TileEventsListener> tileChangesListeners;
@@ -107,6 +108,10 @@ public class Game {
   public Game fork() {
     final var tileClones = this.tiles.stream().map(Tile::clone).collect(Collectors.toList());
     return new Game(tileClones, this.score);
+  }
+
+  public boolean hasWinningTile() {
+    return this.tiles.stream().anyMatch(tile -> tile.getValue() == WINNING_TILE_VALUE);
   }
 
   public void reset() {

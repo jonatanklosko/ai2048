@@ -1,6 +1,5 @@
 package agh.cs.game2048.ui;
 
-import agh.cs.game2048.game.Game;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -9,7 +8,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class Navbar extends HBox {
-  public Navbar(Game game) {
+  public Navbar(Controller controller) {
+    final var game = controller.getGame();
+
     final var title = new Label("2048");
     title.getStyleClass().add("title");
 

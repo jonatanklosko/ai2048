@@ -12,6 +12,7 @@ public class Toolbar extends HBox {
     final var run = new Button("Run");
     run.getStyleClass().add("button");
     run.setOnAction(event -> controller.toggleRunning());
+    run.disableProperty().bind(controller.gameOver);
 
     this.getChildren().addAll(newGame, run);
     this.getStyleClass().add("toolbar");

@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 /* Solver implementing the Monte Carlo method.
    Inspired by https://towardsdatascience.com/2048-solving-2048-with-monte-carlo-tree-search-ai-2dbe76894bab */
 public class Solver {
-  public static final int NUMBER_OF_RUNS = 50;
+  public static final int NUMBER_OF_RUNS = 100;
 
   static class RunResult {
     public final int score;

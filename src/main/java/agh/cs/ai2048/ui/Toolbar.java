@@ -1,4 +1,4 @@
-package agh.cs.game2048.ui;
+package agh.cs.ai2048.ui;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;

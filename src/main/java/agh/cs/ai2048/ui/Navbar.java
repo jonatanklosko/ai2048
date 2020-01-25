@@ -1,4 +1,4 @@
-package agh.cs.game2048.ui;
+package agh.cs.ai2048.ui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

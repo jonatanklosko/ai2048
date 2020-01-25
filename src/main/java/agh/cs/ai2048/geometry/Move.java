@@ -1,6 +1,6 @@
-package agh.cs.game2048.geometry;
+package agh.cs.ai2048.geometry;
 
-import agh.cs.game2048.utils.RandomUtils;
+import agh.cs.ai2048.utils.RandomUtils;
 
 public enum Move {
   UP,

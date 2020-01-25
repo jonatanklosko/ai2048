@@ -1,4 +1,4 @@
-package agh.cs.game2048.game.events;
+package agh.cs.ai2048.game.events;
 
 import java.util.List;
 

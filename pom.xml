@@ -29,7 +29,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>agh.cs.game2048.ui.Main</mainClass>
+                    <mainClass>agh.cs.ai2048.ui.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

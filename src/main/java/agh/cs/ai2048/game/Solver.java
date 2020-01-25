@@ -1,7 +1,7 @@
-package agh.cs.game2048.game;
+package agh.cs.ai2048.game;
 
-import agh.cs.game2048.geometry.Move;
-import agh.cs.game2048.utils.RandomUtils;
+import agh.cs.ai2048.geometry.Move;
+import agh.cs.ai2048.utils.RandomUtils;
 
 import java.util.Comparator;
 import java.util.Map;

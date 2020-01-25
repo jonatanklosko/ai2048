@@ -1,8 +1,8 @@
-package agh.cs.game2048.ui;
+package agh.cs.ai2048.ui;
 
-import agh.cs.game2048.game.Game;
-import agh.cs.game2048.game.Solver;
-import agh.cs.game2048.geometry.Move;
+import agh.cs.ai2048.game.Game;
+import agh.cs.ai2048.game.Solver;
+import agh.cs.ai2048.geometry.Move;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

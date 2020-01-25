@@ -1,4 +1,4 @@
-package agh.cs.game2048.geometry;
+package agh.cs.ai2048.geometry;
 
 import java.util.Objects;
 

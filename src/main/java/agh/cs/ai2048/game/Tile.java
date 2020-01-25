@@ -1,6 +1,6 @@
-package agh.cs.game2048.game;
+package agh.cs.ai2048.game;
 
-import agh.cs.game2048.geometry.Position;
+import agh.cs.ai2048.geometry.Position;
 
 public class Tile {
   private int value;

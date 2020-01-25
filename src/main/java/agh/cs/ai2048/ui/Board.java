@@ -1,10 +1,10 @@
-package agh.cs.game2048.ui;
+package agh.cs.ai2048.ui;
 
-import agh.cs.game2048.game.Game;
-import agh.cs.game2048.game.Tile;
-import agh.cs.game2048.game.events.TileAddedEvent;
-import agh.cs.game2048.game.events.TileEvent;
-import agh.cs.game2048.game.events.TileVanishedEvent;
+import agh.cs.ai2048.game.Game;
+import agh.cs.ai2048.game.Tile;
+import agh.cs.ai2048.game.events.TileAddedEvent;
+import agh.cs.ai2048.game.events.TileEvent;
+import agh.cs.ai2048.game.events.TileVanishedEvent;
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.scene.control.Button;

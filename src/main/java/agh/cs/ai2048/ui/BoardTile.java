@@ -1,13 +1,13 @@
-package agh.cs.game2048.ui;
+package agh.cs.ai2048.ui;
 
-import agh.cs.game2048.geometry.Position;
+import agh.cs.ai2048.geometry.Position;
 import javafx.animation.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
-import static agh.cs.game2048.ui.Board.BORDER_SIZE;
-import static agh.cs.game2048.ui.Board.TILE_SIZE;
+import static agh.cs.ai2048.ui.Board.BORDER_SIZE;
+import static agh.cs.ai2048.ui.Board.TILE_SIZE;
 
 public class BoardTile extends Label {
   private static Duration MOVE_DURATION = Duration.millis(60);

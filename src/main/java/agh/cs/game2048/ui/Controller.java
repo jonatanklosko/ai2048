@@ -60,6 +60,7 @@ public class Controller {
   }
 
   public void newGame() {
+    this.solverRunning.set(false);
     this.game.reset();
     this.game.initializeRandomTiles(2);
   }

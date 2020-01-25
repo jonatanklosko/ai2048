@@ -106,34 +106,16 @@
   -fx-background-color: #edc22e;
 }
 
-.tile-4096 {
+.tile-4096, .tile-8192 {
   -fx-font-size: 30px;
-  -fx-text-fill: #f9f6f2;
-  -fx-background-color: #b885ac;
-}
-
-.tile-8192 {
-  -fx-font-size: 30px;
-  -fx-text-fill: #f9f6f2;
-  -fx-background-color: #af6da9;
-}
-
-.tile-16384 {
-  -fx-font-size: 30px;
-  -fx-text-fill: #f9f6f2;
-  -fx-background-color: #ab61a7;
-}
-
-.tile-32768 {
-  -fx-font-size: 30px;
-  -fx-text-fill: #f9f6f2;
-  -fx-background-color: #a755a6;
-}
-
-.tile-65536, .tile-131072, .tile-262144 {
-  -fx-font-size: 25px;
   -fx-text-fill: #f9f6f2;
   -fx-background-color: #3c3a32;
+}
+
+.tile-16384, .tile-32768, .tile-65536 {
+  -fx-font-size: 25px;
+  -fx-text-fill: #f9f6f2;
+  -fx-background-color: #121212;
 }
 
 .toolbar {

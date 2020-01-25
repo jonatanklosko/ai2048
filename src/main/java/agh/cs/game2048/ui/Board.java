@@ -3,7 +3,6 @@ package agh.cs.game2048.ui;
 import agh.cs.game2048.game.Game;
 import agh.cs.game2048.game.Tile;
 import agh.cs.game2048.game.events.TileAddedEvent;
-import agh.cs.game2048.game.events.TileChangedEvent;
 import agh.cs.game2048.game.events.TileEvent;
 import agh.cs.game2048.game.events.TileVanishedEvent;
 import javafx.animation.Animation;

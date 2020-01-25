@@ -51,7 +51,7 @@ public class Controller {
   public void toggleRunning() {
     if (this.solverRunning.get()) {
       this.solverRunning.set(false);
-    } else {
+    } else if (this.game.anyMovePossibility()) {
       this.solverRunning.set(true);
       final var thread = this.createSolverThread();
       thread.setDaemon(true);
@@ -71,7 +71,7 @@ public class Controller {
         final var searchStartTime = System.nanoTime();
         final var move = solver.bestMove();
         final var searchEndTime = System.nanoTime();
-        final var millisLeft = 60 - (searchEndTime - searchStartTime) / 1000000;
+        final var millisLeft = MIN_SOLVER_STEP_MS - (searchEndTime - searchStartTime) / 1000000;
         if (millisLeft > 0) {
           try {
             Thread.sleep(millisLeft);

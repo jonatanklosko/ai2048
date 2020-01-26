@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class App extends Application {
-  private static final String TITLE = "2048";
+  private static final String TITLE = "AI 2048";
 
   public static void main(String[] args) {
     launch(args);
